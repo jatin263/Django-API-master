@@ -16,4 +16,8 @@ urlpatterns=[
     path('getUserCall',views.getUserCall,name="getUserCall"),
     path('summaryData',views.summaryData,name="summaryData"),
     path('stuFeedBack',views.stuFeedBack,name="stuFeedBack"),
+    path('summaryData1',views.summaryData1,name="summaryData1"),
+    path('topThreeUser',views.topThreeUser,name="topThreeUser"),
+    path('userActivity',views.userActivity,name="userActivity"),
+    path('homeFeedBack',views.homeFeedBack,name="homeFeedBack"),
 ]
