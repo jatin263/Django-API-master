@@ -139,3 +139,40 @@ def recFileUpload(request):
         vcReco.save()
         return JsonResponse({"msg":"Done"})
     
+def stuFeedBack(request):
+    if request.method=='GET':
+        stId=request.GET['cid']
+        intt=request.GET['interest']
+        detailss=request.GET['details']
+        stuDataa=studentData.objects.filter(id=stId).get()
+        stuDataa.stFeedBack=intt
+        stuDataa.stDetails=detailss
+        stuDataa.save() 
+        return HttpResponse('Sccuess')
+    
+def getUserCall(request):
+    if request.method=='GET':
+        userID=request.GET['userid']
+        userObj=user.objects.filter(id=userID).get()
+        userStu=studentData.objects.filter(assingTo=userObj).values("id","name","number","stFeedBack","stDetails")
+        userStu=list(userStu)
+        for i in range(len(userStu)):
+            stuDataa=studentData.objects.filter(id=userStu[i]["id"]).get()
+            voicData=voiceRecData.objects.filter(voiceId=stuDataa).get()
+            userStu[i]["l"]="http://localhost:4500/"+voicData.path
+            userStu[i].pop("id")
+        o1=json.dumps(list(userStu),cls=DjangoJSONEncoder)
+        data=json.loads(o1)
+        return JsonResponse(data,safe=False)
+
+def summaryData(request):
+    if request.method=='GET':
+        adminId=request.GET['aid']
+        us=user.objects.filter(aId=adminId).values("id","name")
+        us=list(us)
+        for i in range(len(us)):
+            TotalData=studentData.objects.filter(assingTo=us[i]["id"]).count()
+            us[i]["total"]=TotalData
+            NoDone=studentData.objects.filter(dateAt__isnull=True,assingTo=us[i]["id"]).count()
+            us[i]['comp']=TotalData-NoDone
+        return HttpResponse(us)

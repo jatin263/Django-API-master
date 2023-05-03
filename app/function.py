@@ -37,7 +37,7 @@ def speechToText(s):
             # using google speech recognition
             text = r.recognize_google(audio_text)
             print(text)
-            return [text,s]
+            return [text,s[4:]]
         except:
             return ['Sorry.. run again...',s]
 

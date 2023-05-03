@@ -13,4 +13,7 @@ urlpatterns=[
     path('showAllUsersDetails',views.showAllUsersDetails,name="showAllUsersDetails"),
     path('updateTime',views.updateTime,name="updateTime"),
     path('recFileUpload',views.recFileUpload,name="recFileUpload"),
+    path('getUserCall',views.getUserCall,name="getUserCall"),
+    path('summaryData',views.summaryData,name="summaryData"),
+    path('stuFeedBack',views.stuFeedBack,name="stuFeedBack"),
 ]

@@ -36,6 +36,8 @@ class studentData(models.Model):
     dateAt=models.DateField(null=True, auto_now=False, auto_now_add=False,blank=True)
     callSt=models.TimeField(null=True,auto_now=False,auto_now_add=False,blank=True)
     callEn=models.TimeField(null=True,auto_now=False,auto_now_add=False,blank=True)
+    stFeedBack=models.CharField(null=True,max_length=50,default="")
+    stDetails=models.CharField(null=True,max_length=50,default="")
 
     class Meta:
         db_table=""
